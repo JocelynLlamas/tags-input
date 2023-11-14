@@ -30,6 +30,14 @@ export default {
         newTag: "preact"
         // tags: []
     }),
+    watch: {
+        newTag(newVal){
+            if (newVal.indexOf(",") > -1) {
+                this.newTag = this.newTag.slice(0, -1)
+                this.addNewTag();
+            }
+        }
+    },
     computed: {
         isTagExists(){
             return this.tags.includes(this.newTag)
