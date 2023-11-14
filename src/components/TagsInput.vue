@@ -5,13 +5,16 @@
     <div v-if="!tags.length">
         You have no any tags. Enter it in the input
     </div>
-    <div v-for="(tag, index) in tags">{{ index + ":" + tag }}</div>
+    <div v-for="(tag, index) in tags">{{ tag }}</div>
     
+    <hr/>
+    {{ newTag }}
+
     <input 
         type="text" 
-        :value="newTag" 
-        @keydown.enter="tags.push($event.target.value)"
-        @keydown.tab.prevent="tags.push($event.target.value)"
+        v-model.trim="newTag"
+        @keydown.enter="tags.push(newTag)"
+        @keydown.tab.prevent="tags.push(newTag)"
     />
 </template>
 
