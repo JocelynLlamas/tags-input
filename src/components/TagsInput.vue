@@ -6,7 +6,9 @@
     <div v-if="!tags.length">You have no any tags. Enter it in the input</div>
     <span class="tag-item" v-for="(tag, index) in tags" :key="index">
       {{ tag }}
-      <a class="remove-tag" @click.prevent="removeTag(index)" href="#">&times;</a>
+      <a class="remove-tag" @click.prevent="removeTag(index)" href="#"
+        >&times;</a
+      >
     </span>
 
     <hr />
@@ -26,11 +28,18 @@
 
 <script>
 export default {
-  data: () => ({
-    tags: ["vue", "react", "angular"],
-    newTag: "preact",
-    // tags: []
-  }),
+  data(){
+    return{
+        tags: [...this.selectedTags],
+        newTag: "",
+    }
+  },
+  props: {
+    selectedTags:{
+        type: Array,
+        default: ()=>[]
+    }
+  },
   watch: {
     newTag(newVal) {
       if (newVal.indexOf(",") > -1) {
@@ -104,6 +113,4 @@ export default {
 a.remove-tag {
   text-decoration: none;
 }
-
-
 </style>
